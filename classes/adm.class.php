@@ -677,28 +677,20 @@ class TU extends Config { //thesis and users
     }
 
 
-    public static function SheduleData(){
-
-     $sql="SELECT 
-        concat_ws('','<td>',`ss`.`ru`,'</td>') as `Section`, 
-        concat_ws('','<td title=\"',`tt`.`thesis_id`,'\">', '<b>',`tt`.`speaker`,'</b>',
-        '#',`tt`.`affiliations`,
-        '#<em>', `tt`.`title`,'</em>',
-        '</td>'
-        ) as `Talk`,
-        -- concat_ws('','<td>', `tt`.`date`, '</td>') as `Date`, 
-        concat_ws('','<td>', `tt`.`report_type`, '</td>') as `report`
-        
+    public static function item4ScheduleData(){
+         $sql="SELECT '' as `Order`, '' as `Date`,'' as `Time`, '' as `Duration`,
+        --  `tt`.`in_schedule` as `in_shedule`,
+        `ss`.`ru` `Section`, 
+        concat_ws('. #',`tt`.`speaker`, `tt`.`affiliations`, CONCAT('«',`tt`.`title`,'»'))  `Talk`,  
+        `tt`.`report_type` as  `Report`, `tt`.`thesis_id` `Thesis_id` 
         FROM `".YEAR."_thesises` `tt` 
         JOIN `sections` `ss` 
         ON `ss`.`id`=`tt`.`section`  
-        WHERE `tt`.`report_type` IN ('accepted','poster','oral','invited','-control-')
+        WHERE `tt`.`report_type` IN ('oral','invited','plenary')
         ORDER BY `Section`  DESC
-        limit 20
-        -- work where
-        -- WHERE `tt`.`report_type` IN ('oral','invited')
+        -- limit 20
+        -- WHERE `tt`.`report_type` IN ('accepted','poster','oral','invited','-control-')
         ";
-        // echo $sql;
 
         $sth=self::db()->prepare($sql);
         $sth->execute();
@@ -706,26 +698,20 @@ class TU extends Config { //thesis and users
         return $data;
     }
 
-    public static function SheduleTable($array){
-        $tbl="<table id='schedule'>";
-        
+    public static function item4ScheduleTable($array){
+        $tbl="<table id='itemSchedule' class='schedule'>";
         $tbl.="\r\n<thead>\r<tr>";
-        $tbl.="<th>Order</th>";
-        foreach(array_keys($array[0]) as $k){
-            $tbl.="<th id='{$k}'>$k</th>\n\r";
+        foreach(array_keys($array[0]) as $key){
+            $tbl.="<th>$key</th>\n\r";
         }
         $tbl.="</tr>\r\n</thead>\n\r";
-
         $tbl.="<tbody class='connectedSortable ui-sortable'>\r\n";
         foreach($array as $row){
-            $tbl.="\n\r<tr style='display: table-row;'>\r\n";
-            $tbl.="\n\r";
-            $tbl.="\t<td></td>\n\t";
-
-            foreach($row as $cell){
-                $cell=strip_tags($cell, "<td>,<b>,<sub>,<sup>, <em>");
+            $tbl.="\n\r<tr style='display: table-row;' >\r\n";
+            foreach($row as $k=>$cell){
+                $cell=strip_tags($cell, "<b>,<sub>,<sup>, <em>");
                 $cell=str_replace("#","<br>", $cell);
-                $tbl.=$cell."\n\t";
+                $tbl.="<td>".$cell."</td>\n\t";
             }
             $tbl.="\r\n</tr>";
         }
@@ -733,6 +719,38 @@ class TU extends Config { //thesis and users
         return $tbl;
     }
     
+
+    public static function ScheduleData(){
+        $sql="SELECT 
+        arrange as 'Order', Date, Time, Duration, '' Section,Item, Report,'' as 'Thesis_id'
+        FROM `".YEAR."_schedule`
+       ";
+       $sth=self::db()->prepare($sql);
+       $sth->execute();
+       $data=$sth->fetchAll(PDO::FETCH_ASSOC);
+       return $data;
+   }
+    
+   public static function ScheduleTable($array){
+    $tbl="<table id='Schedule' class='schedule'>";
+    $tbl.="\r\n<thead>\r<tr>";
+    foreach(array_keys($array[0]) as $key){
+        $tbl.="<th>$key</th>\n\r";
+    }
+    $tbl.="</tr>\r\n</thead>\n\r";
+    $tbl.="<tbody class='connectedSortable ui-sortable'>\r\n";
+    foreach($array as $row){
+        $tbl.="\n\r<tr style='display: table-row;' >\r\n";
+        foreach($row as $k=>$cell){
+            $cell=strip_tags($cell, "<b>,<sub>,<sup>, <em>");
+            $cell=str_replace("#","<br>", $cell);
+            $tbl.="<td>".$cell."</td>\n\t";
+        }
+        $tbl.="\r\n</tr>";
+    }
+    $tbl.="\r\n</tbody>\r\n</table>";
+    return $tbl;
+}
 
 
 }

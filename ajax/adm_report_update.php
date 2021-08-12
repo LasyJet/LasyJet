@@ -13,8 +13,9 @@ if(isset($_POST)){
     $thesis_id=$_POST['id'];
     $content=$_POST['value'];
     $field_name='report_type';
+    $duration=(in_array($content, array_keys(TALK_DURATION)))?TALK_DURATION[$content]:0;
 
-    $sql ="UPDATE `".YEAR."_thesises` SET `$field_name`='$content' WHERE `thesis_id`='$thesis_id'";
+    $sql ="UPDATE `".YEAR."_thesises` SET `$field_name`='$content', `schedule_duration`='".$duration."' WHERE `thesis_id`='$thesis_id'";
     // echo $sql;
     $stm=$dbh->prepare($sql);
     $res=$stm->execute();

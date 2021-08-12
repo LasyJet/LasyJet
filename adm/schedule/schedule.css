@@ -29,18 +29,18 @@ td {
 }
 
 .connectedSortable tr:hover {
-    background: rgb(255, 255, 192);
+    background: #9cf5ff;
 }
 
 .ui-sortable-placeholder {
     background: yellow;
 }
 
-#content {
+/* #content {
     width: 60%;
     margin: 1em auto;
-}
+} */
 
-#schedule {
+.schedule {
     width: 100%;
 }

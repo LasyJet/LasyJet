@@ -30,14 +30,18 @@ elseif(strtotime(date("Y-m-d"))>strtotime(FEE_DATE1) && strtotime(date("Y-m-d"))
 else define("FEE",99999);
 
 
+define('TALK_DURATION', array(
+        'poster'=>'0',
+        'plenary'=>'40',
+        'invited'=>'20', 
+        'oral'=>'15'));
 
 
-
-$Accepted=array('accepted', 'poster','oral','invited'); // принятые доклады
+$Accepted=array('accepted', 'poster','oral','invited','plenary'); // принятые доклады
 
 define("NeedPassport",false); // Вкл формы сообщения паспортных данных
 define("accessSertificate",false); //Разрешить скачивание сертификата участника
-define("accessInvitation",false); //Разрешить скачивание приглашения
+define("accessInvitation",true); //Разрешить скачивание приглашения
 
 define("ShowThesisStatus",true); //Показывать статус тезисов (приняты/отклонены ...)
 define("accessLift",FALSE); //Разрешить загрузку презентации в лифте

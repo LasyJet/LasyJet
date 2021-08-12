@@ -8,8 +8,6 @@ include_once("classes/phpmailer/sendmail.php");
 $dbh = new PDO('mysql:host='.$dbhost.';dbname='.$physica_db, $mysqluser, $mysqlpass);
 $dbh->query("SET NAMES utf8");
 
-$_POST['email']=trim($_POST['email']);
-
 if(isset($_POST['forgot'])){
 
     $sql="SELECT `user_id`, `password` FROM `".YEAR."_speaker` WHERE email=:email";
@@ -31,12 +29,13 @@ if(isset($_POST['forgot'])){
     exit();
 }
 
-if(isset($_POST['email'])):
+// if(isset($_POST['email'])):
+if(isset($_GET['email'])):
 
     $sql="SELECT `user_id` FROM `".$YEAR."_speaker` WHERE email=:email AND password=:password";
     $stmt =$dbh->prepare($sql);
-    $stmt->bindValue(":email", $_POST['email']);
-    $stmt->bindValue(":password", $_POST['password']);
+    $stmt->bindValue(":email", $_GET['email']);
+    $stmt->bindValue(":password", $_GET['password']);
     $stmt->execute();
     $data=$stmt->fetch(PDO::FETCH_ASSOC);
     $cnt=$stmt->rowCount();

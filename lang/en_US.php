@@ -17,7 +17,7 @@ $LANG['language']="en";
 $LANG['fill_comment']="Гражданам России заполнять форму по-русски!";
 $LANG['reg_conference']="Registration on conference PhysicA.SPb";
 $LANG['conference']="PhysicA.SPb";
-$LANG['cabinet']="Personal cabinet";
+$LANG['cabinet']="My Account";
 $LANG['familyname']="Family name";
 $LANG['givenname']="Given Name";
 $LANG['parentname']="Patronymic/Additional name";
@@ -72,7 +72,7 @@ $LANG['reg_msg'].="\n\r-----\n\rSincerely,\n\r\torganizing committee of the conf
 
 $LANG['you_registered'] ="You are registered and you can enter your account<br> Check your email.";
 $LANG['you_registered'].="<br>If you have not received an email within a few minutes,<br>check your SPAM folder";
-$LANG['Login']="Log in to your account";
+$LANG['Login']="Existing users login:";
 $LANG['or']="OR";
 $LANG['Submit_enter']="Submit";
 $LANG['forgot_password']="I forgot password";
@@ -81,8 +81,8 @@ $LANG['passwd_recall_info']="information sent to your email";
 $LANG['exit']="Exit";
 $LANG['recall_password']="Recall password";
 
-$LANG['registeration_closed']="Since ".DEADLINE." registration is closed.";
-$LANG['regAnnouncedLater']="Registration opening will be announced later";
+$LANG['registeration_closed']="Registration of new users is closed since ".DEADLINE.".";
+$LANG['regAnnouncedLater']="Reopening of new registrations will be announced";
 
 $LANG['account']="Account";
 $LANG['chPassword']="Change password";

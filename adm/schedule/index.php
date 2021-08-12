@@ -10,62 +10,82 @@ include_once("../../classes/adm.class.php");
 
 $ScheduleTitle=ConfTitle."/".YEAR.": Программа устных докладов.";
 
-$data=TU::SheduleData();
+$itemsdata=TU::item4ScheduleData();
+$itemsTable=TU::item4ScheduleTable($itemsdata);
+$ScheduleData=TU::ScheduleData();
+$ScheduleTable=TU::ScheduleTable($ScheduleData);
 
-$table=TU::SheduleTable($data);
 
 $tpl=file_get_contents("template.html");
 //  $str=str_ireplace("{%ScheduleTable%}", $data, $tpl);
-$content=str_ireplace("{%ScheduleTable%}", $table, $tpl);
-$content=str_ireplace("{%ScheduleTitle%}", $ScheduleTitle, $content);
-$content=str_ireplace("{%testTable%}", testData(), $content);
+$content=str_ireplace("{%ScheduleTitle%}", $ScheduleTitle, $tpl);
+$content=str_ireplace("{%itemsScheduleTable%}", $itemsTable, $content);
+$content=str_ireplace("{%ScheduleTable%}", $ScheduleTable, $content);
+// $content=str_ireplace("{%testTable%}", testData(), $content);
 
 echo $content; 
 
 ##############################################################
 function testData(){
     $data="
-    <table id='schedule'>
+    <table id='schedule_opt' class='schedule'>
         <thead>
             <tr>
-                <th>Data1</th>
-                <th>Data2</th>
-                <th>Data3</th>
-                <th>Data4</th>
+                <th>order</th>
+                <th>Time</th>
+                <th>Duration</th>
+                <th>Section</th>
+                <th>Talk</th>
+                <th>Report</th>
+                <th>id</th>
             </tr>
             </thead>
 
             <tbody class='connectedSortable ui-sortable'>
             <tr style='display: table-row;'>
-                <td>257</td>
-                <td contenteditable='true'>Какой-то текст</td>
-                <td>120.45</td>
-                <td>1.83</td>
+                <td>1</td>
+                <td>10:00</td>
+                <td>00:05</td>
+                <td contenteditable='true'>10</td>
+                <td>Обед</td>
+                <td>--</td>
+                <td>--</td>
             </tr>
             <tr>
-                <td>156</td>
-                <td contenteditable='true'>Другой текст</td>
-                <td>101.95</td>
-                <td>1.82</td>
+                <td>2</td>
+                <td></td>
+                <td></td>
+                <td contenteditable='true'>20</td>
+                <td>Кофебрейк</td>
+                <td>--</td>
+                <td>--</td>
             </tr>
 
             <tr style='display: table-row;'>
-                <td>256</td>
-                <td contenteditable='true'>Дребедень из фывдаооу</td>
-                <td>100.95</td>
-                <td>1.82</td>
+                <td>3</td>
+                <td></td>
+                <td></td>
+                <td contenteditable='true'>10</td>
+                <td>Устная презентация стендовых докладов</td>
+                <td></td>
+                <td></td>
             </tr>
 
             <tr style='display: table-row;'>
-                <td>777</td>
-                <td contenteditable='true'>Финальная чепуха</td>
-                <td>97.95</td>
-                <td>10.5</td>
+                <td>4</td>
+                <td></td>
+                <td></td>
+                <td contenteditable='true'>180</td>
+                <td>Фуршет</td>
+                <td>-</td>
+                <td>-</td>
             </tr>
         </tbody>
     </table>
     ";
 return $data;
 }
+
+
 ?>
 
