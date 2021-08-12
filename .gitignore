@@ -1,0 +1,14 @@
+_backup/
+src/
+uploads/
+js/ckeditor
+js/dataTables
+js/datePicker
+js/mdb
+classes/fpdf
+classes/fpdi
+classes/phpmailer
+classes/ftpdf
+css/app
+css/font-awesome-4.7.0
+css/mdb

@@ -1,0 +1,46 @@
+ul li {
+    min-width: 200px;
+}
+
+.dragging li.ui-state-hover {
+    min-width: 240px;
+}
+
+.dragging .ui-state-hover a {
+    color: green !important;
+    font-weight: bold;
+}
+
+th,
+td {
+    text-align: left;
+    padding: 2px 4px;
+    border: 1px solid;
+}
+
+.connectedSortable tr,
+.ui-sortable-helper {
+    cursor: default;
+}
+
+.connectedSortable td:first-child {
+    cursor: move;
+    /* cursor: default; */
+}
+
+.connectedSortable tr:hover {
+    background: rgb(255, 255, 192);
+}
+
+.ui-sortable-placeholder {
+    background: yellow;
+}
+
+#content {
+    width: 60%;
+    margin: 1em auto;
+}
+
+#schedule {
+    width: 100%;
+}

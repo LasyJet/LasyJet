@@ -1,0 +1,7 @@
+CACHE MANIFEST
+# Версия 1.0
+
+CACHE:
+../js/*
+../css/*
+https://latex.codecogs.com/gif.*

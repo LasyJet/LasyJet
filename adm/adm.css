@@ -1,0 +1,57 @@
+table.dataTable thead .sorting:after,
+table.dataTable thead .sorting:before,
+table.dataTable thead .sorting_asc:after,
+table.dataTable thead .sorting_asc:before,
+table.dataTable thead .sorting_asc_disabled:after,
+table.dataTable thead .sorting_asc_disabled:before,
+table.dataTable thead .sorting_desc:after,
+table.dataTable thead .sorting_desc:before,
+table.dataTable thead .sorting_desc_disabled:after,
+table.dataTable thead .sorting_desc_disabled:before {
+    bottom: .5em
+}
+
+.text-deleted {
+    color: #aaa
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #eee;
+}
+
+tbody tr:hover {
+    background-color: #fcfdcc !important;
+}
+
+th {
+    font-weight: bold !important
+}
+
+.overline {
+    text-decoration: overline !important;
+}
+
+td.highlight {
+    background-color: #fcfdcc !important;
+}
+
+td.sigma5 {
+    background-color: red !important;
+}
+
+td.sigma3 {
+    background-color: #FFAA00 !important;
+}
+
+td.sigma1 {
+    background-color: rgb(253, 255, 128) !important;
+}
+
+#grades table td,
+#grades table th {
+    text-align: center;
+}
+
+.pull-left {
+    float: left !important;
+}

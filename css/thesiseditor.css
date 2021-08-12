@@ -1,0 +1,196 @@
+	.wrapper {
+	    min-width: 50em;
+	    max-width: 70em;
+	    margin: 3em auto;
+	    padding: 2em 4em;
+	    border: 1px solid black;
+	    -moz-box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+	    /* Для Firefox */
+	    -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+	    /* Для Safari и Chrome */
+	    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+	    /* Параметры тени */
+	}
+	
+	.authors {
+	    color: darkblue
+	}
+	
+	.affiliations {
+	    margin: 1em 0 0 0;
+	}
+	
+	.speaker_contacts {
+	    margin: 1em 0 0 0
+	}
+	
+	.speaker {
+	    font-weight: bold;
+	    font-style: italic
+	}
+	
+	.speaker_email {
+	    margin: 0.5em 0 0
+	}
+	
+	blockquote {
+	    margin: 0 2em 1em
+	}
+	
+	h1 {
+	    font-size: 1.6em;
+	}
+	/* h2 { font-size:1.4em } */
+	
+	h3 {
+	    font-size: 1.2em
+	}
+	
+	h1,
+	h2,
+	h3 {
+	    padding: 1em 0 0 0;
+	}
+	/* margin-left:-15px; margin-right: -15px} */
+	
+	* {
+	    font-family: "Times New Roman", Times, serif;
+	}
+	
+	.text p {
+	    text-align: justify;
+	    text-indent: 1em;
+	}
+	/* input:submit, b	utton {font-size:1em !important} */
+	
+	#grade {
+	    background-color: #eee
+	}
+	
+	#grade select {
+	    width: 100px
+	}
+	
+	span.grade {
+	    margin: 0 0.5em;
+	}
+	
+	#grade td {
+	    vertical-align: top;
+	    margin: 1px
+	}
+	
+	#grade label {
+	    margin: 0
+	}
+	
+	#clean_form,
+	#togglefields {
+	    cursor: pointer;
+	    text-decoration: underline;
+	}
+	/* Style a bit the inline editables. */
+	
+	*[contenteditable="true"],
+	.editable-select {
+	    padding: .5rem !important;
+	    margin: 0 !important;
+	    background: #ffffe2
+	}
+	
+	.edit {
+	    padding: 3px;
+	    margin: 1em 0;
+	    background: #ffffe2
+	}
+	
+	.cke_editable.cke_editable_inline {
+	    cursor: pointer;
+	}
+	/* Once an editable element gets focused, the "cke_focus" class is
+	   added to it, so we can style it differently. */
+	
+	.cke_editable.cke_editable_inline.cke_focus {
+	    box-shadow: inset 0px 0px 10px 3px #ddd, inset 0 0 1px palegoldenrod;
+	    outline: none;
+	    background: cornsilk;
+	    cursor: text;
+	}
+	
+	span.cke_editable.cke_editable_inline.cke_focus {
+	    box-shadow: none;
+	}
+	/* Avoid pre-formatted overflows inline editable. */
+	
+	.cke_editable_inline pre {
+	    white-space: pre-wrap;
+	    word-wrap: break-word;
+	}
+	
+	#popup {
+	    background-color: white;
+	    height: 4rem;
+	    width: 20rem;
+	    position: fixed;
+	    top: 40%;
+	    left: 40%;
+	    color: red;
+	    font-size: 120%;
+	    text-align: center;
+	    padding: 1em;
+	    border: 1px solid gray;
+	    display: table-cell;
+	    vertical-align: middle;
+	}
+	
+	.one_thesis {
+	    background-color: white;
+	}
+	
+	.grade1 {
+	    background-color: red
+	}
+	
+	.grade2 {
+	    background-color: #FF7F00
+	}
+	
+	.grade3 {
+	    background-color: #FFAA00
+	}
+	
+	.grade4 {
+	    background-color: #FFD200
+	}
+	
+	.grade5 {
+	    background-color: #D5F800
+	}
+	
+	.grade6 {
+	    background-color: #00F725
+	}
+	
+	.grade7 {
+	    background-color: #00F784
+	}
+	
+	.grade8 {
+	    background-color: #00F7D2
+	}
+	
+	.grade9 {
+	    background-color: #00ADF7
+	}
+	
+	.grade9 {
+	    background-color: #005FF7
+	}
+	
+	.grade10 {
+	    background-color: #0000F7
+	}
+	
+	.grade * {
+	    cursor: pointer
+	}

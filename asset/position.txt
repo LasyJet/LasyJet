@@ -1,0 +1,11 @@
+<option>студент</option>
+<option>аспирант</option>
+<option>м.н.с</option>
+<option>н.с.</option>
+<option>с.н.с.</option>
+<option>в.н.с.</option>
+<option>г.н.с.</option>
+<option>доцент</option>
+<option>профессор</option>
+<option>инженер</option>
+<option>лаборант</option>
