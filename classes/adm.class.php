@@ -679,14 +679,14 @@ class TU extends Config { //thesis and users
 
     public static function item4ScheduleData(){
          $sql="SELECT '' as `Order`, '' as `Date`,'' as `Time`, '' as `Duration`,
-        --  `tt`.`in_schedule` as `in_shedule`,
-        `ss`.`ru` `Section`, 
+        -- `ss`.`ru` `Section`, 
         concat_ws('. #',`tt`.`speaker`, `tt`.`affiliations`, CONCAT('«',`tt`.`title`,'»'))  `Talk`,  
         `tt`.`report_type` as  `Report`, `tt`.`thesis_id` `Thesis_id` 
         FROM `".YEAR."_thesises` `tt` 
         JOIN `sections` `ss` 
         ON `ss`.`id`=`tt`.`section`  
-        WHERE `tt`.`report_type` IN ('oral','invited','plenary')
+        WHERE `tt`.`report_type` IN ('oral','invited','plenary') 
+            AND `tt`.`thesis_id` not in (SELECT thesis_id FROM `".YEAR."_schedule`)
         ORDER BY `Section`  DESC
         -- limit 20
         -- WHERE `tt`.`report_type` IN ('accepted','poster','oral','invited','-control-')
@@ -722,9 +722,13 @@ class TU extends Config { //thesis and users
 
     public static function ScheduleData(){
         $sql="SELECT 
-        arrange as 'Order', Date, Time, Duration, '' Section,Item, Report,'' as 'Thesis_id'
+        arrange as 'Order', DATE_FORMAT(`Date`, '%c-%d') as 'Date', TIME_FORMAT(Time, '%H:%i') as 'Time', Duration, 
+        Item, Report, Thesis_id
         FROM `".YEAR."_schedule`
-       ";
+        ORDER by arrange
+       "; 
+    //    '' as Section, 
+
        $sth=self::db()->prepare($sql);
        $sth->execute();
        $data=$sth->fetchAll(PDO::FETCH_ASSOC);
@@ -742,7 +746,7 @@ class TU extends Config { //thesis and users
     foreach($array as $row){
         $tbl.="\n\r<tr style='display: table-row;' >\r\n";
         foreach($row as $k=>$cell){
-            $cell=strip_tags($cell, "<b>,<sub>,<sup>, <em>");
+            // $cell=strip_tags($cell, "<b>,<sub>,<sup>,<em>,<i>");
             $cell=str_replace("#","<br>", $cell);
             $tbl.="<td>".$cell."</td>\n\t";
         }

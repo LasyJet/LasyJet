@@ -2,7 +2,7 @@
 
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <title></title>
+    <title>Расписание</title>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta name="robots" content="noindex, nofollow">
     <meta name="googlebot" content="noindex, nofollow">
@@ -26,13 +26,16 @@
 </head>
 
 <body style="cursor: auto;">
-    <div id='content' css="container">
+    <div id='content' css="container" style='padding:2em'>
         <h1>{%ScheduleTitle%} </h1>
-        <button id='save'>Сохранить</button>
-        <div class="row border">
+        <div class="row">
+            <div class="col mb-2">
+                <button id='save' class='font-weight-bold btn btn-info'>Сохранить</button> <span id='event' class="font-weight-bold"></span>
+            </div>
+        </div>
+        <div class="row">
             <div class="col">{%ScheduleTable%}</div>
             <div class="col">{%itemsScheduleTable%}</div>
-
             <!-- <div class="col">{%testTable%}</div> -->
         </div>
         <hr/>

@@ -1,48 +1,60 @@
 <?
 //save schedule
 header("Content-Type: text/html; charset=utf-8");
+ini_set('error_reporting', E_ALL);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+
 include_once("../../config.php");
 
 $pdo = new PDO('mysql:host='.$dbhost.';dbname='.$physica_db, $mysqluser, $mysqlpass);
 $pdo->query("SET NAMES utf8");
 
-// $sql ="UPDATE `".YEAR."_thesises` SET `$field_name`='$content', `schedule_duration`='".$duration."' WHERE `thesis_id`='$thesis_id'";
-// echo $sql;
-
-// id,arrange, date, time, duration, item, report, thesis_id
-
- $stmt = $pdo->prepare(
-     "INSERT INTO `".YEAR."_schedule`  (arrange, date, time, duration, item, report, thesis_id) 
-                            VALUES 
-                                (:Order, :Date, :Time, :Duration, :Item, :Report, :thesis_id)
-                        ");
-
-$sql="INSERT INTO `".YEAR."_schedule` (arrange, date, time, duration, item, report, thesis_id) VALUES ";
-
-
-/*
- try {
-    $pdo->beginTransaction();
-    foreach ($data as $row)
-    {
-        $stmt->execute($row);
-    }
-    $pdo->commit();
-}catch (Exception $e){
-    $pdo->rollback();
-    throw $e;
-}
- */
+// id,
+// arrange, date, time, duration, item, report, thesis_id - fields from database  
+// :Order, :Date, :Time, :Duration, :Item, :Report, :thesis_id - from POST['data']
 
 if(!empty($_POST)){
     $data=json_decode($_POST['data'], true);
-    foreach($_POST['data']){
+    $stmt=$pdo->query("SELECT id FROM `".YEAR."_schedule`");
+    $stmt->execute();
+    $res=$stmt->fetchALL(PDO::FETCH_COLUMN);
+    $exist_ids=implode(",", $res);
+
+    $stmt = $pdo->prepare(
+        "INSERT INTO `".YEAR."_schedule`  (arrange, date, time, duration, item, report, thesis_id) 
+                               VALUES 
+                                   (:order, :date, :time, :duration, :item, :report, :thesis_id)
+                           ");
+
+    foreach ($data as $key=>$d){
+        // echo "\n\n"."Element ".$key."\r\n";
+        unset($d['Section']);
+
+        foreach($d as $k=>$v) {
+                $d[":".strtolower($k)]=$d[$k];
+                unset($d[$k]);
+        }
+        try{
+           $stmt->execute($d);
+
+        }
+        catch (Exception $e) {
+            echo $e->getMessage();
+        }
     
     }
 
-    print_r($data);
+    if (empty($e)){
+    // echo "DELETE  FROM `".YEAR."_schedule` WHERE id in (".$exist_ids.")";
+       $stmt=$pdo->query("DELETE FROM `".YEAR."_schedule` WHERE id in (".$exist_ids.")");
+       $stmt->execute();
+       echo 'saved';
+    }
 }
 else {
-    echo "ERROR";
+    echo "error";
 }
+
+
 ?>
