@@ -15,9 +15,10 @@ if(isset($_POST)){
 
     $thesis_id=$_POST['id'];
     $content=$_POST['value'];
-    $field_name='section';
+    // $field_name='section';
 
-    $sql ="UPDATE `".YEAR."_thesises` SET `$field_name`='$content' WHERE `thesis_id`='$thesis_id'";
+    // $sql ="UPDATE `".YEAR."_thesises` SET `$field_name`='$content' WHERE `thesis_id`='$thesis_id'";
+    $sql ="UPDATE `".YEAR."_thesises` SET `section`='$content' WHERE `thesis_id`='$thesis_id'";
     // echo $sql;
     $stm=$dbh->prepare($sql);
     $res=$stm->execute();

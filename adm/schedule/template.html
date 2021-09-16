@@ -9,15 +9,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="icon" href="data:;base64,iVBORw0KGgo=">
-    <link rel="stylesheet" href="../../css/bootstrap.min.css">
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 
-    <!-- <script src="../../js/jquery.min.js"></script> -->
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
     <script type="text/javascript" src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
     <!-- <script src="../../js/bootstrap.min.js"></script> -->
     <script type="text/javascript" src="schedule.js"></script>
 
-    <!-- <link rel="stylesheet" type="text/css" href="/css/result-light.css"> -->
+    <link rel="stylesheet" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="schedule.css">
     <link rel="stylesheet" type="text/css" href="context.css">
 
@@ -28,9 +28,13 @@
 <body style="cursor: auto;">
     <div id='content' css="container" style='padding:2em'>
         <h1>{%ScheduleTitle%} </h1>
-        <div class="row">
-            <div class="col mb-2">
-                <button id='save' class='font-weight-bold btn btn-info'>Сохранить</button> <span id='event' class="font-weight-bold"></span>
+        <div class="row mb-2">
+            <div class="col"><button id='helpme' type="button" class="btn btn-outline-secondary">?</button>&nbsp;
+                <button id='save' class='font-weight-bold btn btn-info'>Сохранить</button>
+                <span id='event' class="font-weight-bold"></span>
+            </div>
+            <div class="col text-right">
+
             </div>
         </div>
         <div class="row">
@@ -42,13 +46,49 @@
 
     </div>
 
+
     <br><br>
     <div class="context-menu-open">
         <ul>
-            <li id="addRowBelow"><a href='javascript:void(0);'>Add row Below</a></li>
+            <li id="addRowBelow"><a href='javascript:void(0);'>Add row Before</a></li>
             <li id="deleteRow"><a href='javascript:void(0);'>Delete row</a></li>
+            <!-- <li id="duplicateRow"><a href='javascript:void(0);'>Duplicate row</a></li> -->
             <li id="addRowAfter"><a href='javascript:void(0);'>Add row After</a></li>
         </ul>
+    </div>
+    <div id="help" title="Что как">.
+        <ul>
+            <li>
+                Скрипты далеки от совершенства. &laquo;Не стреляйте в пианиста - играет как умеет&raquo;.
+            </li>
+            <li>
+                Слева&nbsp;&mdash; составляемое расписание, справа&nbsp;&mdash; источник докладов из таблицы докладчиков
+            </li>
+            <li>
+                Справа налево мышкой за крестик &times; перетаскиваются элементы
+            </li>
+            <li>
+                Элементы расписания можно сортировать перетаскиванием.
+            </li>
+            <li>
+                Элементы отсутствующие в таблице-источнике, добавляются в расписание через контекстное меню щелчком левой кнопкой мыши на номере по порядку.
+            </li>
+            <li>
+                Все строки таблиц редактируемы. Но сохраняются только те что в таблице-расписании.
+            </li>
+            <li>
+                ВАЖНО. Для нормального функционирования необходимо в начальной ячейке таблицы расписания вписать дату в формате дд.мм, в следующей ячейке по горизонтали записать стартовое время, а далее длительность В следующих строках расписания достаточно указывать
+                только длительность, остальное программа посчитает сама после нажатия на кнопку "Сохранить" Для нового дня нужно вписать дату, начальное время и длительность первого мероприятия.
+            </li>
+            <li>
+                Элементы не содержащие длительность не участвуют в расчёте времени.
+            </li>
+            <li>
+                Если счатается как-то не так&nbsp;&mdash; обновите страницу Ctrl+R
+            </li>
+
+        </ul>
+
     </div>
 </body>
 

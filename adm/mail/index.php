@@ -1,5 +1,5 @@
 <?php
-include_once("../config.php");
+include_once("../../config.php");
 
 $orgComiteeSign="С уважением,\nОргкомитет конференции ФизикА.СПб/".YEAR;
 $textform_example="\nЗдравствуйте %speaker%!
@@ -12,7 +12,7 @@ $textform_example="\nЗдравствуйте %speaker%!
 # Исходные данные #
 
 - группа рассылки (accepted, rejected, oral, poster ...)
-- или id персоны (здесь или в отдельном скрипе)
+- или id персоны (здесь или в отдельном скрипте)
 
 
 # Что сделать #
@@ -60,13 +60,13 @@ $body=str_ireplace($search,$replace,$body);
 
     <link rel="icon" href="data:;base64,iVBORw0KGgo=">
     <script src="https://use.fontawesome.com/7b07b4d79c.js"></script>
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
     <link href="email.css" rel="stylesheet">
 
-    <script src="../js/jquery.min.js"></script>
-    <script src="../js/autoresize.jquery.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <script src='../js/email.js'></script>
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/autoresize.jquery.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+    <script src="email.js"></script>
 
 </head>
 

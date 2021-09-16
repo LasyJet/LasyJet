@@ -61,7 +61,8 @@ class TU extends Config { //thesis and users
         FROM `".YEAR."_thesises` `tt` JOIN `".YEAR."_speaker` `ts` ON `tt`.`user_id`=`ts`.`user_id` 
         JOIN `sections` `ss` ON `ss`.`id`=`tt`.`section` 
         WHERE `ts`.`deleted`='-' "
-        .(($accepted)?"AND `tt`.`report_type` IN ('poster','oral','invited')":"") 
+        // .(($accepted)?"AND `tt`.`report_type` IN ('poster','oral','invited')":"") 
+        .(($accepted)?"AND `tt`.`report_type` IN ('poster','oral')":"")     
         .((hideEmpty)?"AND length(`tt`.`text`)>200 ":"")
         ." ORDER BY `tt`.`section`";
 
@@ -211,7 +212,9 @@ class TU extends Config { //thesis and users
             "list"=>"Список участников",
             "theses"=>"Список тезисов",
             "stat"=>"Статистика",
-            "grades"=>"Оценки");
+            "grades"=>"Оценки",
+            "shedule"=>"Расписание"
+        );
     
         if(!empty($_GET)){
             return $arHeader[array_keys($_GET)[0]];
@@ -678,18 +681,28 @@ class TU extends Config { //thesis and users
 
 
     public static function item4ScheduleData(){
-         $sql="SELECT '' as `Order`, '' as `Date`,'' as `Time`, '' as `Duration`,
-        -- `ss`.`ru` `Section`, 
+
+        // $sql="SELECT '&times;' as `Order`, '' as `Date`,'' as `Time`, '' as `Duration`,
+        // -- `ss`.`ru` `Section`, 
+        // concat_ws('. #',`tt`.`speaker`, `tt`.`affiliations`, CONCAT('«',`tt`.`title`,'»'))  `Talk`,  
+        // `tt`.`report_type` as  `Report`, `tt`.`thesis_id` `Thesis_id` 
+        // FROM `".YEAR."_thesises` `tt` 
+        // JOIN `sections` `ss` 
+        // ON `ss`.`id`=`tt`.`section`  
+        // WHERE `tt`.`report_type` IN ('oral','invited','plenary') 
+        //     AND `tt`.`thesis_id` not in (SELECT thesis_id FROM `".YEAR."_schedule`)
+        // ORDER BY `Section`  DESC
+        // ";
+
+         $sql="SELECT '&times;' as `Order`, '' as `Date`,'' as `Time`, '' as `Duration`,
         concat_ws('. #',`tt`.`speaker`, `tt`.`affiliations`, CONCAT('«',`tt`.`title`,'»'))  `Talk`,  
         `tt`.`report_type` as  `Report`, `tt`.`thesis_id` `Thesis_id` 
         FROM `".YEAR."_thesises` `tt` 
-        JOIN `sections` `ss` 
-        ON `ss`.`id`=`tt`.`section`  
         WHERE `tt`.`report_type` IN ('oral','invited','plenary') 
             AND `tt`.`thesis_id` not in (SELECT thesis_id FROM `".YEAR."_schedule`)
-        ORDER BY `Section`  DESC
-        -- limit 20
-        -- WHERE `tt`.`report_type` IN ('accepted','poster','oral','invited','-control-')
+        UNION
+        SELECT '¤' as `Order`, '' as `Date`,'' as `Time`, '' as `Duration`, '--- эту строчку не переносить ---'  `Talk`, '' as  `Report`, '' `Thesis_id`
+
         ";
 
         $sth=self::db()->prepare($sql);
@@ -715,6 +728,15 @@ class TU extends Config { //thesis and users
             }
             $tbl.="\r\n</tr>";
         }
+        
+        //add empty row
+        // $emptyrow="<tr>";
+        // foreach($array[0] as $a){
+        //     $emptyrow.="<td></td>";
+        // }
+        // $emptyrow.="</tr>";
+
+        // $tbl.=$emptyrow;
         $tbl.="\r\n</tbody>\r\n</table>";
         return $tbl;
     }
@@ -722,8 +744,7 @@ class TU extends Config { //thesis and users
 
     public static function ScheduleData(){
         $sql="SELECT 
-        arrange as 'Order', DATE_FORMAT(`Date`, '%c-%d') as 'Date', TIME_FORMAT(Time, '%H:%i') as 'Time', Duration, 
-        Item, Report, Thesis_id
+        arrange as 'Order', DATE_FORMAT(`Date`, '%d.%c') as 'Date', TIME_FORMAT(Time, '%H:%i') as 'Time', Duration,  Talk, Report, Thesis_id
         FROM `".YEAR."_schedule`
         ORDER by arrange
        "; 
@@ -736,25 +757,81 @@ class TU extends Config { //thesis and users
    }
     
    public static function ScheduleTable($array){
-    $tbl="<table id='Schedule' class='schedule'>";
-    $tbl.="\r\n<thead>\r<tr>";
-    foreach(array_keys($array[0]) as $key){
-        $tbl.="<th>$key</th>\n\r";
-    }
-    $tbl.="</tr>\r\n</thead>\n\r";
-    $tbl.="<tbody class='connectedSortable ui-sortable'>\r\n";
-    foreach($array as $row){
-        $tbl.="\n\r<tr style='display: table-row;' >\r\n";
-        foreach($row as $k=>$cell){
-            // $cell=strip_tags($cell, "<b>,<sub>,<sup>,<em>,<i>");
-            $cell=str_replace("#","<br>", $cell);
-            $tbl.="<td>".$cell."</td>\n\t";
+        $tbl="<table id='Schedule' class='schedule'>";
+        $tbl.="\r\n<thead>\r<tr>";
+        foreach(array_keys($array[0]) as $key){
+            $tbl.="<th>$key</th>\n\r";
         }
-        $tbl.="\r\n</tr>";
+        $tbl.="</tr>\r\n</thead>\n\r";
+        $tbl.="<tbody class='connectedSortable ui-sortable'>\r\n";
+        foreach($array as $row){
+            $tbl.="\n\r<tr style='display: table-row;' >\r\n";
+            foreach($row as $k=>$cell){
+                // $cell=strip_tags($cell, "<b>,<sub>,<sup>,<em>,<i>");
+                $cell=str_replace("#","<br>", $cell);
+                $tbl.="<td>".$cell."</td>\n\t";
+            }
+            $tbl.="\r\n</tr>";
+        }
+        //add empty row
+        $emptyrow="<tr>";
+        foreach($array[0] as $a){
+            $emptyrow.="<td>-</td>";
+        }
+        $emptyrow.="</tr>";
+
+        $tbl.=$emptyrow;
+        $tbl.="\r\n</tbody>\r\n</table>";
+        return $tbl;
+        }
+
+   public static function ScheduleTableToSight($array){ // 'Order','Date' (if not 00.0), 'Time', Duration,  Item, Report, Thesis_id
+    
+    function sumTime($time, $minutes){
+        if(strpos($time,":")){
+            $hourmin=explode( ":", $time);
+            $mins=$hourmin[1]+$minutes; // sum minutes only
+            $hourFromMin=intdiv($mins,60);
+            $mins=$mins%60;
+            $mins=(strlen($mins)==1)?"0".$mins:$mins;
+            return ($hourmin[0]+$hourFromMin).":".($mins);
+        }
+        else {
+            return "nope";
+        }
     }
+
+    $tbl="<table id='schedule' class='schedule'>";
+    $tbl.="\r\n<thead>\r<tr>";
+    $tbl.="<th>Начало</th>\n\r";
+    $tbl.="<th>Конец</th>\n\r";
+    $tbl.="<th>Доклад</th>\n\r";
+    $tbl.="</tr>\r\n</thead>\n\r";
+    $tbl.="<tbody>\r\n";
+    foreach($array as $a){
+        $tbl.="\n\r<tr>\r\n"; 
+
+        if($a['Date']!=='00.0'){
+            $date=explode(".", $a['Date']);
+            $date[1]=($date[1]=='10')?"октября":"";
+            $tbl.="<td colspan=3><h4 class='text-center'>".$date[0]." ".$date[1]."</h4></td>\r\n"; 
+            $tbl.="</tr>";
+
+            $tbl.="<tr>";
+        }
+        
+        $tbl.="<td>".$a['Time']."</td>\r\n"; 
+        $tbl.="<td>".(sumTime($a['Time'], $a['Duration']))."</td>\r\n"; 
+        @$report=(array_key_exists($a['Report'], TALK_RUS))?"<em>".TALK_RUS[$a['Report']]." доклад</em><br>":"";
+        $talk=str_replace("<sup>1</sup><br><sup>1</sup>", ", ", $a['Talk']);
+        $tbl.="<td>".$report.$talk."</td>\r\n"; 
+    
+        $tbl.="</tr>\r\n";
+    }
+
     $tbl.="\r\n</tbody>\r\n</table>";
     return $tbl;
-}
+    }
 
 
 }

@@ -19,13 +19,11 @@ $(document).ready(function() {
 
 
     var init, data, field_name, msg;
-    // var maxCharLimit=4500; //in php file
     $("[contenteditable='true']").on({
 
         focus: function(event) {
             init = $(this).html();
             field_name = $(this).attr('id')
-                // console.log('enter to '+field_name+"\n "+init);
         },
         blur: function() {
             data = $(this).html();

@@ -5,7 +5,7 @@
 header('Content-Type: text/html; charset=utf-8');
 
 include_once("config.php");
-include_once("classes/index.fn.php");
+include_once("classes/index.fn.php"); //надо бы переписать, но пока лень
 include_once($lang_file);
 
 
@@ -127,6 +127,18 @@ $dbh->query("SET NAMES utf8");
 							echo (accessSertificate && $allow_sertificate)?"<hr/>".$LANG['Sertificate']:"";
 						}
 					?>
+					<? // статус платежа ?>
+					<div>
+							<h5 class='cart-title text-info'><?=$LANG['fee_status_header']?></h5>
+							<?
+							if($_SESSION['fee'] =='---'){
+								echo $LANG['fee_status_empty'];
+							}
+							else{
+								echo $LANG['fee_status_success']." ".$_SESSION['fee']." ".$LANG['fee_currency'];
+							}
+							?>
+						</div>
 					</div>
 
 					<?
@@ -137,7 +149,7 @@ $dbh->query("SET NAMES utf8");
                      
                     // Загрузка постера
 					if(in_array($_SESSION['this_report_type'], ['poster','review']) && AllowUploadPoster){
-                        include_once("asset/index_upload_poster");
+						include_once("asset/index_upload_poster.php");
                     }
 					
                     // необходимо сообщить паспорнные данные гражданам России
@@ -171,9 +183,10 @@ $dbh->query("SET NAMES utf8");
         if(isset($_SESSION['user_id'])){
             include_once("asset/index_messages.php");
         }
-        ?>
+        ?>	
 	<?# $payment_sight="http://inno-mir.ru/ru/payment/index.php"?>
 	<!-- <p><a href="<?=$payment_sight?>?id=<?=$_SESSION['user_id']?>&name=<?=$_SESSION['fullname']?>">payment</a></p> -->
+	
 	</div><!-- container -->
 	
 <div id="shutter">

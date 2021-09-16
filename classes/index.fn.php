@@ -103,14 +103,17 @@ function messages($PDO){
 	$messages="";
 	if(!empty($_SESSION['user_id'])){
 		// $_SESSION['user_id']
-		$sql="SELECT `messages` FROM `".YEAR."_messages` WHERE `user_id`=:user_id";
+		$sql="SELECT `messages`, DATE_FORMAT(`datetime`, '%Y-%m-%d') as `datetime` FROM `".YEAR."_messages` WHERE `user_id`=:user_id";
 		$stmt = $PDO->prepare($sql);
 		$stmt->bindValue(":user_id", $_SESSION['user_id']);
 		$stmt->execute();
 		// $count_row=$stmt->rowCount();
 		while($msgs=$stmt->fetch(PDO::FETCH_ASSOC)){
 			// var_dump($msgs);
-			$messages.="<div class='message border border-info m-1 p-1'>".$msgs['messages']."</div>";
+			$messages.="<div class='message border border-info m-1 p-1'>";
+			$messages.="<p class='font-weight-bold small m-0'>".$msgs['datetime']."</p>";
+			$messages.=$msgs['messages'];
+			$messages.="</div>";
 		}
 
 	}

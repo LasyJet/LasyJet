@@ -15,10 +15,10 @@ $SITE=SITE; // где-то может использоваться переме�
 $YEAR=YEAR; //
 define("DEADLINE","2021-02-29");
 define("dateConf","18-22 октября ".YEAR);
-define("Excursion",true);
+define("Excursion",false);
 
 define("FEE_DATE1","2021-09-03");
-define("FEE_DATE2","2021-09-15");
+define("FEE_DATE2","2021-10-15");
 
 //оплата оргвзноса
 if(strtotime(date("Y-m-d"))<strtotime(FEE_DATE1)){
@@ -27,14 +27,23 @@ if(strtotime(date("Y-m-d"))<strtotime(FEE_DATE1)){
 elseif(strtotime(date("Y-m-d"))>strtotime(FEE_DATE1) && strtotime(date("Y-m-d"))<=strtotime(FEE_DATE2)){
     define("FEE",6300);
 }
-else define("FEE",99999);
+else define("FEE",7250);
 
 
 define('TALK_DURATION', array(
         'poster'=>'0',
         'plenary'=>'40',
         'invited'=>'20', 
-        'oral'=>'15'));
+        'oral'=>'15')
+    );
+
+define('TALK_RUS', array(
+        'poster'=>'стенодовый',
+        'plenary'=>'пленарный',
+        'invited'=>'приглашенный', 
+        )
+    );
+    //'oral'=>'устный'
 
 
 $Accepted=array('accepted', 'poster','oral','invited','plenary'); // принятые доклады
@@ -44,8 +53,8 @@ define("accessSertificate",false); //Разрешить скачивание с�
 define("accessInvitation",true); //Разрешить скачивание приглашения
 
 define("ShowThesisStatus",true); //Показывать статус тезисов (приняты/отклонены ...)
-define("accessLift",FALSE); //Разрешить загрузку презентации в лифте
-define("AllowUploadPoster",FALSE); //Разрешить загрузку постеров
+define("accessLift",true); //Разрешить загрузку презентации в лифте
+define("AllowUploadPoster",true); //Разрешить загрузку постеров
 define("allowThesisEdit",true); // разрешить редатктирование тезисов
 define("allowGrade",true);
 
@@ -68,7 +77,7 @@ define("JPCS_SITE","https://physicaspb2021.iopconferenceseries.rivervalley.io");
 
 
 
-$fee=array('---'=>'---','4000'=>'4000','5000'=>'5000','6000'=>'6000','7000'=>'7000');
+$fee=array('---'=>'---', '5000'=>'5000','6000'=>'6000','7000'=>'7000');
 $fee=json_encode($fee);
 
 $bd=array('test','ioffe','skl','pn','kea'); //бэкдор-ссылки (form.php)

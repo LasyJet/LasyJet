@@ -176,4 +176,9 @@ please contact us by e-mail <a href='mailto:".CONF_EMAIL."'>".CONF_EMAIL."</a></
 
 // $LANG['Sertificate']="<p><a href='sertificate.php'>.</a></a>";
 
+$LANG['fee_status_header']="Registration fee";
+$LANG['fee_status_empty']="has not been paid yet, if this is not the case, contact the organizing committee <a href='mailto:".CONF_EMAIL."?subject=registration%20fee%20problem'>".CONF_EMAIL."</a>";
+$LANG['fee_status_success']="has been paid in the amount of";
+$LANG['fee_currency']="RUR";
+
 ?>

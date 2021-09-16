@@ -1,6 +1,6 @@
 <?
 header("Content-Type: text/html; charset=utf-8");
-include_once("../config.php");
+include_once("../../config.php");
 
 $dbh = new PDO('mysql:host='.$dbhost.';dbname='.$physica_db, $mysqluser, $mysqlpass);
 $dbh->query("SET NAMES utf8");

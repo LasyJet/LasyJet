@@ -25,67 +25,6 @@ $content=str_ireplace("{%ScheduleTable%}", $ScheduleTable, $content);
 
 echo $content; 
 
-##############################################################
-function testData(){
-    $data="
-    <table id='schedule_opt' class='schedule'>
-        <thead>
-            <tr>
-                <th>order</th>
-                <th>Time</th>
-                <th>Duration</th>
-                <th>Section</th>
-                <th>Talk</th>
-                <th>Report</th>
-                <th>id</th>
-            </tr>
-            </thead>
-
-            <tbody class='connectedSortable ui-sortable'>
-            <tr style='display: table-row;'>
-                <td>1</td>
-                <td>10:00</td>
-                <td>00:05</td>
-                <td contenteditable='true'>10</td>
-                <td>Обед</td>
-                <td>--</td>
-                <td>--</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td></td>
-                <td></td>
-                <td contenteditable='true'>20</td>
-                <td>Кофебрейк</td>
-                <td>--</td>
-                <td>--</td>
-            </tr>
-
-            <tr style='display: table-row;'>
-                <td>3</td>
-                <td></td>
-                <td></td>
-                <td contenteditable='true'>10</td>
-                <td>Устная презентация стендовых докладов</td>
-                <td></td>
-                <td></td>
-            </tr>
-
-            <tr style='display: table-row;'>
-                <td>4</td>
-                <td></td>
-                <td></td>
-                <td contenteditable='true'>180</td>
-                <td>Фуршет</td>
-                <td>-</td>
-                <td>-</td>
-            </tr>
-        </tbody>
-    </table>
-    ";
-return $data;
-}
-
 
 ?>
 

@@ -1,0 +1,55 @@
+<html data-lt-installed="true">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Расписание</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="googlebot" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="adm/schedule/schedule.css">
+    <link rel="stylesheet" type="text/css" href="adm/schedule/context.css">
+    <link rel="stylesheet" type="text/css" href="../../css/font-awesome-4.7.0/css/font-awesome.min.css">
+    <script>
+        $(document).ready(function() {
+            $("td:contains('Стендовая')").each(function() {
+
+                let section = $(this).text();
+                let ref = "https://reg.physica.spb.ru/posters.php";
+                section = "<a href='" + ref + "'><i class='fa fa-calendar-o' aria-hidden='true'>" + section + "</i></a>";
+                $(this).html(section);
+            });
+
+        });
+    </script>
+</head>
+
+<body style="cursor: auto;">
+    <div css="container" style='min-width:760px; max-width:56rem; margin: 0 auto '>
+        <h1 class='text-center'>
+            <a href="http://physica.spb.ru">
+                <img src="img/Physica_logo.svg" alt="PhysicA.SPb" height="40px" />
+            </a>
+            {%ScheduleTitle%}
+        </h1>
+
+        <p class="font-weight-bold text-center ">
+            <a href="https://reg.physica.spb.ru/posters.php ">
+
+                <i class="fa fa-calendar-o " aria-hidden="true "></i> Расписание стендовых сессий</a>
+        </p>
+        <div class="row ">
+            <div class="col ">{%ScheduleTable%}</div>
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>

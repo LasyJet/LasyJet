@@ -57,3 +57,16 @@ thead tr:first-child {
 .schedule {
     width: 100%;
 }
+
+#help {
+    display: none;
+}
+
+h1 {
+    font-weight: 100
+}
+
+
+/* #Schedule tbody tr:last-child {
+    background-color: gray;
+} */

@@ -12,8 +12,10 @@ if(isset($_GET['quit'])) {
     header('Location: '.SITE.'/adm');
 }
 
-if(isset($_GET['accepted'])) $accepted=true;
-else $accepted=false;
+// if(isset($_GET['accepted'])) $accepted=true;
+// else $accepted=false;
+
+$accepted=true;
 
 if(TU::Authorise()){
 

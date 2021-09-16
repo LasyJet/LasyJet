@@ -139,6 +139,9 @@ else{
                 <li class="nav-item">
 					<a class="nav-link <?=TU::setActiveLink('grades')?>" href="<? echo SITE?>/adm/?grades=1">Оценки</a>
 				</li>
+                <li class="nav-item">
+					<a class="nav-link <?=TU::setActiveLink('shedule')?>" href="<? echo SITE?>/adm/schedule/">Составление расписания</a>
+				</li>
 
 				<!--<li class="nav-item">
 					<a class="nav-link disabled <?=TU::setActiveLink('msg')?>" href="<? echo SITE?>/adm?msg=1">Messages</a>

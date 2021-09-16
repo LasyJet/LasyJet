@@ -188,5 +188,10 @@ $LANG['Sertificate']="<p>".$pdfIcon."<a href='sertificate.php'> <b>Скачат�
 <i>Сертификат создаётся автоматически. Если вас результат в чём-то не устраивает обратитесь
 по адресу <a href='mailto:".CONF_EMAIL."'>".CONF_EMAIL."</a></i></p>";
 
+$LANG['fee_status_header']="Огвзнос";
+$LANG['fee_status_empty']="пока не внесён, если взнос внесён но здесь не отображен, свяжитесь с оргкомитетом <a href='mailto:".CONF_EMAIL."?subject=registration%20fee%20problem'>".CONF_EMAIL."</a>";
+$LANG['fee_status_success']="внесён в размере ";
+$LANG['fee_currency']="руб.";
+
 // $LANG['Sertificate']="<p><a href='sertificate.php'>.</a>";
 ?>
